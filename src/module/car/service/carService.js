@@ -9,12 +9,12 @@ module.exports = class Service{
         return this.carRepository.save(car)
     }
 
-    async delete(){
+    async delete(car){
         return this.carRepository.delete(car)
     }
 
-    async getById(){
-        return this.carRepository.getById(car)
+    async getById(id){
+        return this.carRepository.getById(id)
     }
 
     async getAll(){

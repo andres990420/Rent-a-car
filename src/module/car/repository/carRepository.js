@@ -1,11 +1,56 @@
+const { where } = require('sequelize');
+const {modelToEntity} = require('../mapper/carMapper')
+
 module.exports = class CarRepository {
-    constructor(Database){
-        this.database = Database;
+    constructor(carModel){
+        this.carModel = carModel;
     }
 
-    getAll(){
-        // this.database.prepare("INSERT INTO cars (brand, model, year, kms, color, ac, passanger, transmission) VALUES('toyot', 'corolla', 2006, 10000, 'rojo', 1, 4, 'manual')").run()
-        const carros = this.database.prepare("SELECT * FROM cars").all();
-        return carros
+    async getAll(){
+        // const car = this.carModel.create(
+        //     {
+        //         brand : 'toyota',
+        //         model : 'corolla',
+        //         year : 2010,
+        //         mileage : 500000,
+        //         color : 'red',
+        //         ac: false,
+        //         capacity : 5,
+        //         transmission : 'Automatico',
+        //         pricePerDay : 40.2,
+        //     }
+        // )
+        const cars = await this.carModel.findAll();
+        return cars.map((car) => car.toJSON());
+    }
+
+    async save(car){
+        if(car.id){
+            console.log(1)
+               await this.carModel.update(car,{
+            where: {
+                id: car.id
+            }
+           }) 
+        }else{
+            // await this.carModel.create(car)
+        }
+    }
+
+    async delete(car){
+        await this.carModel.destroy({
+            where: {
+                id: car.id,
+            },
+        });
+    }
+
+    async getById(id){
+        const car = await this.carModel.findOne({
+            where: {
+                id: id,
+            },
+        });
+        return modelToEntity(car);
     }
 }

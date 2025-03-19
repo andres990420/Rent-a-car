@@ -1,0 +1,35 @@
+
+    {% extends 'view/layout/base.html' %}
+    {% block body %}
+    <section class="section">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <p class="card-header-title">Informacion detallada</p>
+                </div>
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="https://bulma.io/assets/images/placeholders/1280x960.png">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <ul>Modelo : {{car.model}}</ul>
+                        <ul>Marca : {{car.brand}}</ul>
+                        <ul>Anio : {{car.year}}</ul>
+                        <ul>Kilometraje : {{car.mileage}}</ul>
+                        <ul>Capacidad maxima de pasajeros : {{car.capacity}}</ul>
+                        <ul>Transmision : {{car.transmission}}</ul>
+                        <ul>Color : {{car.color}}</ul>
+                        <ul>Aire Acondicionado : {{car.ac}}</ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="card-footer-item" href="/car"><-- Inicio</a>
+                    <a class="card-footer-item" href="/car/form/{{car.id}}">Editar</a>
+                    <a class="card-footer-item" href="/car/delete/{{car.id}}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </section>    
+    {% endblock %}

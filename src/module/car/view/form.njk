@@ -1,0 +1,118 @@
+{% extends 'view/layout/base.html' %}
+
+{% block body %}
+
+<div class="container ">
+    <section class="section">
+        <h1 class="title is-1">{{titulo}}</h1>
+        <form id="formulario" class="mb-3" method="POST">
+            <div class="field">
+                <label class="label" for="brand">Marca</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Toyota" name="brand" value="{{car.brand}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="model">Modelo</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Corolla" name="model" value="{{car.model}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="year">Anyo</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="Ej. 2007" name="year" value="{{car.year}}"/>
+                </div>
+            </div>
+            <label class="label" for="mileage">Kilometraje</label>
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="number" placeholder="20000" name="mileage" value="{{car.mileage}}"/>
+                </div>
+                <p class="control">
+                    <a class="button is-static">
+                        KMS
+                    </a>
+                </p>
+            </div>
+            <div class="field">
+                <label class="label" for="color">Color</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Azul" name="color" value="{{car.color}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="ac">Aire Acondicionado</label>
+                <div class="field">
+                    <div class="control">
+                    <label class="radio" id="radio" data-ac={{car.ac}}>
+                        <input id="ac-yes" type="radio" name="ac" value="true">
+                        Yes
+                    </label>
+                    <label class="radio">
+                        <input id="ac-no" type="radio" name="ac" value="false">
+                        No
+                    </label>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="capacity">Capacidad maxima de pasajeros</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="5" name="capacity" value="{{car.capacity}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="transmission">Transmision</label>
+                <div class="control">
+                    <div class="select is-info is-rounded">
+                        <select name="transmission" data-transmission={{car.transmission}} id="select">
+                            <option>---Selecciona el tipo de transmision---</option>
+                            <option id="select-automatico">Automatico</option>
+                            <option id="select-manual">Manual</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <label class="label" for="price-per-day">Precio por dia</label>
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="number" placeholder="40" name="price-per-day" value="{{car.pricePerDay}}"/>
+                </div>
+                <p class="control">
+                    <a class="button is-static">
+                        $
+                    </a>
+                </p>
+            </div>
+            <div class="field">
+                <div class="control id-expanded">
+                    <button id="enviar" class="button is-primary is-fullwidth is-rounded">{{boton}}</button>
+                </div>
+            </div>
+        </form>
+        <button class="button is-link is-danger is-outlined is-fullwidth is-rounded" onclick="location.href='/car'" >Cancel</button>
+    </section>
+</div>
+{% endblock %}
+
+{% block footerScripts %}
+{{super()}}
+{% if car %}
+    <script type='text/javascript'>
+        const transmission = document.querySelector('select').dataset.transmission;
+        const ac  = document.querySelector('#radio').dataset.ac;
+        if(ac === 'true'){
+            document.getElementById("ac-yes").setAttribute('checked', true);
+        }else{
+            document.getElementById("ac-no").setAttribute('checked', true);
+        }
+        
+        if(transmission === 'Manual'){
+            document.getElementById("select-manual").setAttribute('selected', true);
+        } else{
+            document.getElementById("select-automatico").setAttribute('selected', true);
+        }
+    </script>
+{% endif %}
+{% endblock %}

@@ -1,29 +1,42 @@
 {% extends 'view/layout/base.html' %}
-
 {% block body %}
-<table class='table is-borderd'>
-    <thead>
-        <tr>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>A;os</th>
-            <th>Status</th>
-            <th>Cantidad maxima de pasajeros</th>
-        </tr>
-    </thead>
-    <tbody class='is-text-centered'>
-        <tr>
-            <th>Toyota</th>
-            <th>corolla</th>
-            <th>2006</th>
-            <th class="tag is-success">Disponible</th>
-            <th>5</th>
-        </tr>
-    </tbody>
-</table>
+<section class="section">
+    <div class="container p-3">
+        <button class="button is-info" onclick="location.href='/car/form/create'">Agregar un nuevo carro</button>
+    </div>
+    <div class="container">
+        <table class='table is-borderd'>
+            <thead>
+                <tr>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>A;os</th>
+                    <th>Transmision</th>
+                    <th>Cantidad maxima de pasajeros</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for car in cars %}
+            <tbody class='is-text-centered'>
+                <tr>
+                    <th>{{car.brand}}</th>
+                    <th>{{car.model}}</th>
+                    <th>{{car.year}}</th>
+                    <th class="tag is-success">{{car.transmission}}</th>
+                    <th>{{car.capacity}}</th>
+                    <th>
+                        <a href="/car/view/{{car.id}}">Detalles</a>
+                        <a href="/car/form/edit/{{car.id}}">Editar</a>
+                        <a href="/car/delete/{{car.id}}">ELIMINAR</a>
+                    </th>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</section>
 
 {% endblock %}
 
 {% block footerScripts %}
-<script></script>
 {% endblock %}

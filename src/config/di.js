@@ -1,23 +1,41 @@
 require('dotenv').config()
-const Database = require('better-sqlite3');
+
 const { default : DIContainer, object, get, factory } = require('rsdi');
+const {Sequelize} = require('sequelize');
+const { CarController, CarRepository, CarService, CarModel} = require('../module/car/module');
 
-const { CarController, CarRepository, CarService} = require('../module/car/module');
 
-
-function configureDatabase(){
-    return new Database('C:/Users/andre/Documents/GitHub/Rent-a-car/data/database.db', {verbose :console.log})
+function configureSequelize(){
+    const sequelizeInstance = new Sequelize({
+        dialect: 'sqlite',
+        storage : '/data/database.sqlite'
+    })
+    return sequelizeInstance
 }
-'"C:\Users\andre\Documents\GitHub\Rent-a-car\data\database.db"'
 
-module.exports = function configureDI(){
-    const container = new DIContainer();
+function configureCarModel(container){
+    return CarModel.setup(container.get('Sequelize'))
+}
+
+function addCommonDefinitions(container){
+    container.addDefinitions({
+        Sequelize : object(configureSequelize)
+    });
+};
+
+function addCarModuleCommoDefinitions(container){
     container.addDefinitions({
         CarController: object(CarController).construct(get('CarService')),
         CarService: object(CarService).construct(get('CarRepository')),
-        CarRepository : object(CarRepository).construct(get('Database')),
-        Database : factory(configureDatabase)
+        CarRepository : object(CarRepository).construct(get('CarModel')),
+        CarModel : factory(configureCarModel)
     });
+}
+
+module.exports = function configureDI(){
+    const container = new DIContainer();
+    addCommonDefinitions(container);
+    addCarModuleCommoDefinitions(container);
 
     return container
 }
