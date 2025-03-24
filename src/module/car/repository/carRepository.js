@@ -26,14 +26,15 @@ module.exports = class CarRepository {
 
     async save(car){
         if(car.id){
-            console.log(1)
-               await this.carModel.update(car,{
-            where: {
-                id: car.id
-            }
-           }) 
+               await this.carModel.update(
+                car,
+                {
+                    where: {
+                        id: car.id
+                    }
+                }) 
         }else{
-            // await this.carModel.create(car)
+            await this.carModel.create(car)
         }
     }
 
