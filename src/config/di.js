@@ -2,7 +2,8 @@ require('dotenv').config()
 
 const { default : DIContainer, object, get, factory } = require('rsdi');
 const {Sequelize} = require('sequelize');
-const { CarController, CarRepository, CarService, CarModel} = require('../module/car/module');
+const { CarController, CarRepository, CarService, CarModel} = require('../module/car/carModule');
+const { ClientController, ClientService, ClientRepository, ClientModel } = require('../module/client/clientModule');
 
 
 function configureSequelize(){
@@ -15,6 +16,10 @@ function configureSequelize(){
 
 function configureCarModel(container){
     return CarModel.setup(container.get('Sequelize'))
+}
+
+function configureClientModel(container){
+    return ClientModel.setup(container.get('Sequelize'))
 }
 
 function addCommonDefinitions(container){
@@ -32,10 +37,20 @@ function addCarModuleCommoDefinitions(container){
     });
 }
 
+function addCLienteModuleCommoDefinitions(container){
+    container.addDefinitions({
+        ClientController: object(ClientController).construct(get('ClientService')),
+        ClientService : object(ClientService).construct(get('ClientRepository')),
+        ClientRepository : object(ClientRepository).construct(get('ClientModel')),
+        ClientModel : factory(configureClientModel)
+    })
+}
+
 module.exports = function configureDI(){
     const container = new DIContainer();
     addCommonDefinitions(container);
     addCarModuleCommoDefinitions(container);
+    addCLienteModuleCommoDefinitions(container);
 
     return container
 }

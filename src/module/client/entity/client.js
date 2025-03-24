@@ -3,19 +3,27 @@ module.exports = class Client{
         id,
         name,
         lastName,
-        dni,
-        birthday,
+        documentType,
+        documentNumber,
+        nationality,
+        address,
+        phoneNumber,
         email,
-        phone,
-        address
+        birthday,
+        createdAt,
+        updatedAt
     }){
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.dni = dni;
-        this.birthday = birthday;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
+        this.id = id,
+        this.name = name,
+        this.lastName = lastName,
+        this.documentType = documentType,
+        this.documentNumber = documentNumber,
+        this.nationality = nationality,
+        this.address = address,
+        this.phoneNumber = phoneNumber,
+        this.email = email,
+        this.birthday = birthday,
+        this.createdAt = createdAt,
+        this.updatedAt = updatedAt
     }
 }

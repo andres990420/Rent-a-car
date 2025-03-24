@@ -1,0 +1,35 @@
+{% extends 'view/layout/base.html'%}
+
+{% block body%}
+
+<section class="section">
+    <div class="container">
+        <button class="button is-info" onclick="location.href='clients/form'">Agregar nuevo cliente</button>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Documento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for client in clients %}
+            <tbody>
+                <tr>
+                    <th>{{client.name}}</th>
+                    <th>{{client.documentType}}</th>
+                    <th>
+                        <button class="button is-info"  onclick="location.href='clients/client/{{client.id}}'">Detalle</button>
+                        <button class="button is-danger">Eliminar</button>
+                        <button class="button is-primary"  onclick="location.href='clients/form/{{client.id}}'">Editar</button>
+                    </th>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+{% endblock %}

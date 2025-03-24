@@ -1,0 +1,94 @@
+{% extends 'view/layout/base.html' %}
+
+{% block body %}
+
+<div class="container ">
+    <section class="section">
+        <h1 class="title is-1">{{titulo}}</h1>
+        <form id="formulario" class="mb-3" method="POST">
+            <div class="field">
+                <label class="label" for="name">Nombre</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Pedro" name="name" value="{{client.name}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="lastName">Apellido</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Martinez" name="lastName" value="{{client.lastName}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="documentType">Tipo de Documento</label>
+                <div class="control">
+                    <div class="select is-info is-rounded">
+                        <select name="documentType" data-document-type={{client.documentType}} id="select">
+                            <option>---Selecciona el tipo de Documento---</option>
+                            <option id="select-dni">Cedula</option>
+                            <option id="select-passportl">Pasaporte</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <label class="label" for="documentNumber">Numero del documento</label>
+            <div class="field">
+                <div class="control is-expanded">
+                    <input class="input" type="number" placeholder="24324234" name="documentNumber" value="{{client.documentNumber}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="nationality">Nacionalidad</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Venezolano" name="nationality" value="{{client.nationality}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="address">Direccion</label>
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="calle siempretriste 45" name="address" value="{{client.address}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="phoneNumber">Numero de telefono</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="2314141241" name="phoneNumber" value="{{client.phoneNumber}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="email">Email</label>
+                <div class="control">
+                    <input class="input" type="email" placeholder="pmartinez@mail.com" name="email" value="{{client.email}}"/>
+                </div>
+            </div>
+            <label class="label" for="birthday">Fecha de nacimiento</label>
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="date" placeholder="" name="birthday" value="{{client.birthday}}"/>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control id-expanded">
+                    <button id="enviar" class="button is-primary is-fullwidth is-rounded">{{boton}}</button>
+                </div>
+            </div>
+        </form>
+        <button class="button is-link is-danger is-outlined is-fullwidth is-rounded" onclick="location.href='/clients'" >Cancel</button>
+    </section>
+</div>
+{% endblock %}
+
+{% block footerScripts %}
+{{super()}}
+{% if client %}
+    <script type='text/javascript'>
+        const documentType = document.querySelector('select').dataset['document-type'];
+        if(documentType === 'Pasaporte'){
+            document.getElementById("select-passport").setAttribute('selected', true);
+        } else{
+            document.getElementById("select-dni").setAttribute('selected', true);
+        }
+    </script>
+{% endif %}
+{% endblock %}
