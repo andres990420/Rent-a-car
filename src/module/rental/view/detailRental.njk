@@ -1,0 +1,34 @@
+{% extends 'view/layout/base.html' %}
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <p class="card-header-title">Informacion detallada</p>
+                </div>
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="https://bulma.io/assets/images/placeholders/1280x960.png">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <ul>Carro : {{rental.Car.model}}</ul>
+                        <ul>Cliente : {{rental.Client.name}}</ul>
+                        <ul>Precio por dia del auto : {{rental.pricePerDay}}</ul>
+                        <ul>Fecha de inicio : {{rental.startedAt}}</ul>
+                        <ul>Fecha de finalizacion: {{rental.endedAt}}</ul>
+                        <ul>Precio total de la renta: {{rental.totalPrice}}</ul>
+                        <ul>Metodo de pago: {{rental.paymentMethod}}</ul>
+                        <ul>Status del pago : {{rental.isPaid}}</ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="card-footer-item" href="/rentals"><-- Inicio</a>
+                    <a class="card-footer-item" href="/rentals/form/{{rental.id}}">Editar</a>
+                    <a class="card-footer-item" href="/retanls/delete/{{rental.id}}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </section>    
+{% endblock %}

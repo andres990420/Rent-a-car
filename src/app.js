@@ -4,10 +4,11 @@ const path = require('path')
 
 const express = require('express');
 const nunjucks = require('nunjucks');
-const configureDIC = require('./config/di');
+const configureDI = require('./config/di');
 
-const {initCarModule} = require('./module/car/carModule');
-const {initClientModule} = require('./module/client/clientModule')
+const { initCarModule } = require('./module/car/carModule');
+const { initClientModule } = require('./module/client/clientModule');
+const { initRentalModule } = require('./module/rental/rentalModule');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,9 +24,10 @@ nunjucks.configure('module/', {
 });
 
 
-const container = configureDIC();
+const container = configureDI();
 
 initCarModule(app, container);
 initClientModule(app, container);
+initRentalModule(app, container);
 
 app.listen(port, () => {console.log('Server listening at http://localhost:',port)});

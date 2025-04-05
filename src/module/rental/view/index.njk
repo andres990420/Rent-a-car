@@ -1,0 +1,49 @@
+{% extends 'view/layout/base.html' %}
+{% block body %}
+    <section class="section">
+        <div class="container m-3">
+            <button class="button is-primary" onclick="location.href='rentals/form'">Agregar renta</button>
+        </div>
+        <div class="container">
+            <table class="table is-striped is-bordered">
+                <thead>
+                    <tr class="is-link">
+                        <th>Auto</th>
+                        <th>Cliente</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de finalizacion</th>
+                        <th>Metodo de pago</th>
+                        <th>Estatus del pago</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                {% for rental in rentals %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="car/view/{{rental.Car.id}}" target="_blank">{{rental.Car.model}}</a>
+                        </td>
+                        <td>
+                            <a href="clients/client/{{rental.Client.id}}" target="_blank">{{rental.Client.name}}</a>
+                        </td>
+                        <td>{{rental.startedAt}}</td>
+                        <td>{{rental.endedAt}}</td>
+                        <td>{{rental.paymentMethod}}</td>
+                        <td>
+                            {% if rental.isPaid == true %}
+                            <p class="tag is-primary">Pagado</p></td>
+                            {% else %}
+                            <p class="tag is-danger">Pago pendiente</p></td>
+                            {% endif %}
+                        <td>
+                            <button class="button is-info is-small" onclick="location.href='rentals/rental/{{rental.id}}'" >Detalles</button>
+                            <button class="button is-info is-small" onclick="location.href='rentals/form/{{rental.id}}'">Editar</button>
+                            <button class="button is-danger is-small" onclick="location.href='rentals/delete/{{rental.id}}'">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock %}
