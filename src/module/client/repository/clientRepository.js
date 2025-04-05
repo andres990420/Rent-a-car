@@ -1,6 +1,3 @@
-const { where } = require("sequelize");
-
-
 module.exports = class ClientRepository{
     constructor(clientModel){
         this.clientModel =  clientModel;
