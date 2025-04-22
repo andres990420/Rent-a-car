@@ -24,9 +24,9 @@ function formToEntity(
         address,
         Number(phoneNumber),
         email,
-        birthday,
-        createdAt,
-        updatedAt
+        Date(birthday),
+        Date(createdAt),
+        Date(updatedAt)
     )
 
     return client
@@ -56,9 +56,9 @@ function modelToEntity(
         address,
         Number(phoneNumber),
         email,
-        birthday,
-        createdAt,
-        updatedAt
+        Date(birthday),
+        Date(createdAt),
+        Date(updatedAt)
     )
 
     return client

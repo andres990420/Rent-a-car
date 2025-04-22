@@ -25,8 +25,8 @@ function modelToEntity(
         capacity,
         transmission,
         Number(pricePerDay),
-        createdAt,
-        updatedAt
+        Date(createdAt),
+        Date(updatedAt)
     );
     return car;
 }
@@ -57,8 +57,8 @@ function formToEntity(
             capacity,
             transmission,
             Number(pricePerDay),
-            createdAt,
-            updatedAt
+            Date(createdAt),
+            Date(updatedAt)
         );
         return car;
 }
