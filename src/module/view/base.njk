@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {% block styles %}{% endblock %}     
+
+    <title>Document</title>
+</head>
+
+<body>
+    {% include "view/layouts/navbar.njk" %}
+    <section>
+        {% block body %}{% endblock %}
+    </section>
+    <script type="application/javascript" src="/js/menu.js"></script>
+    {% block footerScripts %}{% endblock %}
+</body>
+</html>
