@@ -1,0 +1,14 @@
+.card-client {
+    background-color: #1e1e1e;
+    border: 1px solid #2c2c2c;
+    margin: 1rem auto;
+    max-width: 900px;
+  }
+
+  .card-header-title .icon {
+    margin-right: 0.75rem;
+  }
+
+  .detail-value{
+      margin: 0.3rem 0.3rem 0.75rem;
+  }
