@@ -1,0 +1,17 @@
+{% extends 'view/base.njk' %}
+{% block styles %}
+<link rel="stylesheet" href="/css/rentalForm.css">
+{% endblock %}
+{% block body %}
+    <div class="container ">
+    <section class="section">
+        <h1 class="title header-title">Editando el auto con id {{car.id}}</h1>   
+        <div class="box">
+            {% include 'car/views/layouts/form.njk' %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block footerScripts %}
+<script type='text/javascript' src="/js/cancelButton.js"></script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'view/base.njk' %}
+{% block styles %}
+<link rel="stylesheet" href="/css/carCard.css">
+{% endblock %}
+{% block body %}
+<section class="section">
+    <div class="container">
+        <h2 class="title is-2 has-text-danger">
+            {{car.model}} {{car.brand}} {{car.year}}
+        </h2>
+        <div class="card" data-type="cars" data-id="{{car.id}}">
+            <div class="card-horizontal">
+                {% include 'car/views/layouts/carCard.njk' %}
+            </div>
+            {% include 'view/layouts/cardFooter.njk'%}
+        </div>
+        
+    </div>
+</section>    
+{% endblock %}
+{% block footerScripts %}
+<script type="text/javascript" src="/js/cardFooter.js"></script>
+{% endblock %}

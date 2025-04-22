@@ -1,0 +1,59 @@
+{% extends 'view/base.njk' %}
+{% block body %}
+<section class="section">
+    <h1 class="title header-title"> Gestion de Autos</h1>
+    <button class="button is-link" onclick="location.href='/cars/create'">
+        <span class="icon"><i class="fas fa-plus"></i></span>
+        <span>Agregar un nuevo carro</span>
+    </button>
+    <div class="table-container" style="margin-top: 1rem">
+        <table class="table is-striped is-hoverable">
+            <thead>
+                <tr class="is-warning ">
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-hashtag"></i></span>ID</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-car"></i></span>Marca</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-car-side"></i></span>Modelo</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-calendar"></i></span>A;os</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-cogs"></i></span>Transmision</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-users"></i></span>Capacidad</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-dollar-sign"></i></span>Precio por dia</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-tachometer-alt"></i></span>Kilometraje(KMS)</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-star"></i></span>Acciones</th>
+                </tr>
+            </thead>
+            {% for car in cars %}
+            <tbody class='is-text-centered'>
+                <tr>
+                    <th>{{car.id}}</th>
+                    <th>{{car.brand}}</th>
+                    <th>{{car.model}}</th>
+                    <th>{{car.year}}</th>
+                    <th>{{car.transmission}}</th>
+                    <th>{{car.capacity}}</th>
+                    <th>${{car.pricePerDay}}</th>
+                    <th>{{car.mileage.toLocaleString()}} kms</th>
+                    <th>
+                        <button class="button is-info is-small" onclick="location.href='/cars/{{car.id}}/view'">
+                            <span class="icon"><i class="fas fa-info-circle"></i></span>
+                            <span>Detalles</span>
+                        </button>
+                        <button class="button is-success is-small" onclick="location.href='/cars/{{car.id}}/edit'">
+                            <span class="icon"><i class="fas fa-edit"></i></span>
+                            <span>Editar</span>
+                        </button>
+                        <button class="button is-danger is-small" onclick="location.href='/cars/{{car.id}}/delete'">
+                            <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                            <span>Eliminar</span>
+                        </button>
+                    </th>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block footerScripts %}
+{% endblock %}

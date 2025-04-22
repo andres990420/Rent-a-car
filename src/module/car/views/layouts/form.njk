@@ -1,0 +1,145 @@
+<form id="formulario" class="mb-3" method="POST">
+      <div class="columns">
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="brand">Marca</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="text" placeholder="Toyota" name="brand" value="{{car.brand}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-car"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="model">Modelo</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="text" placeholder="Corolla" name="model" value="{{car.model}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-car-side"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column  is-one-third">
+            <div class="field">
+                <label class="label" for="year">Anyo</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="number" placeholder="Ej. 2007" name="year" value="{{car.year}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-one-third">
+            <label class="label" for="mileage">Kilometraje</label>
+            <div class="field has-addons">
+                <div class="control has-icons-left">
+                    <input required class="input" type="number" placeholder="200,000" name="mileage" value="{{car.mileage}}" show="aaa"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </span>
+                </div>
+                <div class="control">
+                    <a class="button is-static">
+                        KMS
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="color">Color</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="text" placeholder="Azul" name="color" value="{{car.color}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-palette"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="ac">Aire Acondicionado</label>
+                <div class="field">
+                    <div class="control">
+                        <span class="icon">
+                            <i class="fas fa-snowflake"></i>
+                        </span>
+                        <label class="radio" id="radio" data-ac={{car.ac}}>
+                            <input {{'checked' if car.ac === true}} type="radio" name="ac" value="true">
+                            Yes
+                        </label>
+                        <label class="radio">
+                            <input {{'checked' if car.ac === false}} type="radio" name="ac" value="false">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-one-third">    
+            <div class="field">
+                <label class="label" for="capacity">Capacidad maxima de pasajeros</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="number" placeholder="5" name="capacity" value="{{car.capacity}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-users"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="transmission">Transmision</label>
+                <div class="control has-icons-left">
+                    <div class="select is-info is-rounded">
+                        <select required name="transmission" data-transmission={{car.transmission}} id="select">
+                            <option disabled>Selecciona el tipo de transmision</option>
+                            <option {{'selected' if car.transmision === 'Automatico'}}>Automatico</option>
+                            <option {{'selected' if car.transmision === 'Manual'}}>Manual</option>
+                        </select>
+                        <span class="icon is-left">
+                            <i class="fas fa-cogs"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="price-per-day">Precio por dia</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="number" placeholder="40" name="price-per-day" value="{{car.pricePerDay}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-dollar-sign"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field is-grouped is-grouped-centered">
+        <div class="control">
+            <button type="submit" class="button is-primary">
+                <span class="icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span>{{button}}</span>
+            </button>
+        </div>
+        <div class="control">
+            <button class="button is-outlined is-danger cancel-button">
+                <span class="icon">
+                    <i class="fas fa-ban"></i>
+                </span>
+                <span>Cancelar</span>
+            </button>
+        </div>
+    </div>
+</form>
