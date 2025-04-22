@@ -1,0 +1,169 @@
+<form id="formulario"  method="POST">
+    <div class="container p-3 m-3">
+        <h2 class="subtitle has-text-link">Datos del auto</h2>
+        <hr class="solid">
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <div class="select is-info is-rounded">
+                            <select required name="car" id="car">
+                                <option disabled selected value="">Selecciona un auto</option>
+                                {% for car in cars %}
+                                    <option data-price="{{car.pricePerDay}}" value="{{car.id}}" 
+                                    data-brand="{{car.brand}}"
+                                    data-model="{{car.model}}"
+                                    data-year="{{car.year}}"
+                                    data-mileage="{{car.mileage.toLocaleString()}}"
+                                    data-capacity="{{car.capacity}}"
+                                    data-transmission="{{car.transmission}}"
+                                    {{'selected' if rental.car === car.id}}> 
+                                    {{car.id}} - {{car.model}} {{car.brand}} {{car.year}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <span class="icon is-left">
+                            <i class="fas fa-car"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <div class="control is-pulled-right">
+                        <a class="button is-link p-1 m-1" href='/cars/create'>
+                            <span class="icon">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                            <span>Agregar un nuevo auto</span>   
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% include 'rental/views/layouts/carData.njk' %}
+    </div>
+
+    <div class="container p-3 m-3">
+        <h2 class="subtitle has-text-link">Datos del cliente</h2>
+        <hr class="solid">
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <div class="select is-info is-rounded">
+                            <select required name="client" id="client">
+                                <option disabled selected value="">Selecciona el cliente</option>
+                                {% for client in clients %}
+                                    <option 
+                                    value="{{client.id}}" 
+                                    data-document-type="{{client.documentType}}" 
+                                    data-document-number="{{client.documentNumber}}"
+                                    data-nationality="{{client.nationality}}"
+                                    data-email="{{client.email}}"
+                                    data-phone-number="{{client.phoneNumber}}"
+                                    {{'selected' if rental.client === client.id}}>
+                                       {{client.id}} - {{client.name}} {{client.lastName}} </option>
+                                {% endfor %}
+                            </select>
+                            <span class="icon is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <div class="control is-pulled-right">
+                        <a class="button is-link p-1 m-1" href='/clients/form'>
+                            <span class="icon"><i class="fas fa-plus"></i></span>
+                            <span>Agregar nuevo cliente</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% include 'rental/views/layouts/clientData.njk' %}
+        
+    </div>
+
+    <div class="container p-3 m-3">
+        <h2 class="subtitle has-text-link">Datos de la renta</h2>
+        <hr class="solid">
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="pricePerDay">Precio por dia del auto</label>
+                    <div class="control has-icons-left">
+                        <input required readonly class="input" type="number" name="pricePerDay" id="pricePerDay" value="{{rental.pricePerDay if rental}}"/>
+                        <span class="icon is-left">
+                            <i class="fas fa-dollar-sign"></i>
+                        <span>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="totalPrice">Precio total por renta</label>
+                    <div class="control has-icons-left">
+                        <input required class="input" type="number"  name="totalPrice" id="totalPrice" readonly value="{{rental.totalPrice if rental}}"/>
+                        <span class="icon is-left">
+                            <i class="fas fa-dollar-sign"></i>
+                        <span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="startedAt">Fecha de inicio</label>
+                    <div class="control has-icons-left">
+                        <input required class="input has-background-grey-light has-text-black" type="datetime-local" name="startedAt" id="startedAt" {{'disabled' if not rental}} value="{{rental.startedAt.toISOString().split('.')[0] if rental}}"/>
+                        <span class="icon is-left has-text-black">
+                            <i class="fas fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label" for="endedAt">Fecha de finalizacion</label>
+                    <div class="control has-icons-left">
+                        <input required class="input has-background-grey-light has-text-black" type="datetime-local" {{'disabled' if not rental}} name="endedAt" id="endedAt" value="{{rental.endedAt.toISOString().split('.')[0] if rental}}"/>
+                        <span class="icon is-left has-text-black">
+                            <i class="fas fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% include 'rental/views/layouts/rentalData.njk' %}
+
+    <div class="field is-grouped is-grouped-centered">
+        <div class="control">
+            <button type="submit" class="button is-primary is-fullwidth">
+                <span class="icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span>{{button}}</span>
+            </button>
+        </div>
+        <div class="control">
+            <button class="button is-danger is-outlined cancel-button" >
+                <span class="icon">
+                    <i class="fas fa-ban"></i>
+                </span>
+                <span>Cancel</span>
+            </button>
+        </div>
+    </div>
+</form>
+
+
+

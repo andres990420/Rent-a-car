@@ -1,0 +1,40 @@
+<div class="container p-3 m-3">
+    <h2 class="subtitle has-text-link">Datos del pago</h2>
+    <hr class="solid">
+    <div class="columns">
+        <div class="column is-half">
+            <div class="field">
+                <label class="label" for="paymentMethod">Metodo de pago</label>
+                <div class="control has-icons-left">
+                    <div class="select is-info is-rounded ">
+                        <select name="paymentMethod">
+                            <option disabled selected value="">Selecciona el tipo de metodo de pago</option>
+                            <option {{'selected' if rental.paymentMethod === 'Efectivo'}}>Efectivo</option>
+                            <option id="select-transfer" {{'selected' if rental.paymentMethod === 'Transferencia'}}>Transferencia</option>
+                        </select>
+                        <span class="icon is-left">
+                            <i class="fas fa-money-bill"></i>
+                        <span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-half">
+            <div class="field">
+                <label class="label m-1" for="isPaid">Status del pago</label>
+                <div class="control has-icons-left">
+                    <div class="select is-info is-rounded">
+                        <select name="isPaid">
+                            <option disabled selected value="">Selecciona el estado del pago</option>
+                            <option value=false {{'selected' if rental.isPaid === false}}>No pagado</option>
+                            <option value=true {{'selected' if rental.isPaid === true}}>Pagado</option>
+                        </select>
+                        <span class="icon is-left">
+                            <i class="fas fa-receipt"></i>
+                        <span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

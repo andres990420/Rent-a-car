@@ -1,0 +1,86 @@
+{% extends 'view/base.njk' %}
+{% block styles %}
+<link rel="stylesheet" href="/css/carCard.css">
+<link rel="stylesheet" href="/css/clientCard.css">
+<link rel="stylesheet" href="/css/rentalCard.css">
+{% endblock %}
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <div class="card" data-type="rentals" data-id="{{rental.id}}">
+                <div class="card-header has-background-link">
+                    <h1 class="card-header-title title is-centered">Informacion detallada</h1>
+                </div>
+                <div class="card-content">
+                    <div class="columns">
+                        <div class="column is-one-third">
+                            <hr type="solid"></hr>
+                            <h2 class="subtitle is-centered is-4 has-text-danger">Informacion del Auto</h2>
+                            <hr type="solid"></hr>
+                            <h2 class="subtitle is-4">
+                                <a class="has-text-link" target="_blanck" href="/cars/{{car.id}}/view/">{{car.model}} {{car.brand}} {{car.year}}</a>
+                                <a class="icon"><i class="fas fa-info-circle"></i></a>
+                            </h2>
+                            {% include 'car/views/layouts/carCard.njk' %}
+                        </div>
+                        <div class="column is-one-third">
+                            <hr type="solid"></hr>
+                            <h2 class="subtitle is-centered is-4 has-text-info">Informacion del Cliente</h2>
+                            <hr type="solid"></hr>
+                            <h2 class="subtitle is-4">
+                                <a class="has-text-link" target="_blanck" href="/clients/{{client.id}}/view/">{{client.name}} {{client.lastName}}</a>
+                                <a class="icon"><i class="fas fa-info-circle"></i></a>
+                            </h2>
+                            {% include 'client/views/layouts/clientCard.njk' %}
+                        </div>
+                        <div class="column is-one-third">
+                            <hr type="solid"></hr>
+                            <h2 class="subtitle is-centered is-4 has-text-warning">Informacion de la renta</h2>
+                            <hr type="solid"></hr>
+                            <div class="content">
+                                <p>
+                                    <span class="icon has-text-warning"><i class="fas fa-dollar-sign"></i></span>
+                                    <strong class="has-text-warning">Precio por dia del auto:</strong> 
+                                    ${{rental.pricePerDay}}
+                                </p>
+                                <p>
+                                    <span class="icon has-text-warning"><i class="fas fa-calendar-check"></i></span>
+                                    <strong class="has-text-warning">Fecha de inicio:</strong> 
+                                    {{rental.startedAt}}
+                                </p>
+                                <p>
+                                    <span class="icon has-text-warning"><i class="fas fa-calendar"></i></span>
+                                    <strong class="has-text-warning">Fecha de finalizacion:</strong> 
+                                    {{rental.endedAt}}
+                                </p>
+                                <p>
+                                    <span class="icon has-text-warning"><i class="fas fa-dollar-sign"></i></span>
+                                    <strong class="has-text-warning">Precio total de la renta:</strong> 
+                                    ${{rental.totalPrice}}
+                                </p>
+                                <p>
+                                    <span class="icon has-text-warning"><i class="fas fa-money-bill"></i></span>
+                                    <strong class="has-text-warning">Metodo de pago:</strong> 
+                                    {{rental.paymentMethod}}
+                                </p>
+                                <p>
+                                    <span class="icon has-text-warning"><i class="fas fa-receipt"></i></span>
+                                    <strong class="has-text-warning">Status del pago:</strong> 
+                                    {% if rental.isPaid === true %}
+                                    Pagado
+                                    {% else %}
+                                    No pagado
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include 'view/layouts/cardFooter.njk'%}
+            </div>
+        </div>
+    </section>    
+{% endblock %}
+{% block footerScripts %}
+<script type="text/javascript" src="/js/cardFooter.js"></script>
+{% endblock %}

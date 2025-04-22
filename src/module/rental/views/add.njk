@@ -1,0 +1,18 @@
+{% extends 'view/base.njk' %}
+{% block styles %}
+<link rel="stylesheet" href="/css/rentalForm.css">
+{% endblock %}
+{% block body %}
+    <div class="container ">
+    <section class="section">
+        <h1 class="title header-title has-text-primary">Agrega una nueva renta</h1>   
+        <div class="box">
+            {% include 'rental/views/layouts/form.njk' %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block footerScripts %}
+<script type='text/javascript' src="/js/cancelButton.js"></script>
+<script type='text/javascript' src="/js/rentalForm.js"></script>
+{% endblock %}
