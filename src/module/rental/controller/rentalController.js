@@ -1,4 +1,4 @@
-const {modelToEntity, formToEntity} = require('../mapper/rentalMapper'); 
+const {formToEntity} = require('../mapper/rentalMapper'); 
 
 module.exports = class RentalController{
     constructor(rentalService, clientService, carService){
@@ -11,41 +11,38 @@ module.exports = class RentalController{
         this.BASE_ROUTE = '/rentals'
 
         app.get(`${this.BASE_ROUTE}`, this.view.bind(this));
-        app.get(`${this.BASE_ROUTE}/form`, this.form.bind(this));
-        app.post(`${this.BASE_ROUTE}/form`, this.save.bind(this));
-        app.get(`${this.BASE_ROUTE}/form/:id`, this.formEditView.bind(this));
-        app.post(`${this.BASE_ROUTE}/form/:id`, this.save.bind(this));
-        app.get(`${this.BASE_ROUTE}/delete/:id`, this.delete.bind(this));
-        app.get(`${this.BASE_ROUTE}/rental/:id`, this.detail.bind(this));
+        app.get(`${this.BASE_ROUTE}/create`, this.createView.bind(this));
+        app.post(`${this.BASE_ROUTE}/create`, this.save.bind(this));
+        app.get(`${this.BASE_ROUTE}/:id/edit`, this.editView.bind(this));
+        app.post(`${this.BASE_ROUTE}/:id/edit`, this.save.bind(this));
+        app.get(`${this.BASE_ROUTE}/:id/delete`, this.delete.bind(this));
+        app.get(`${this.BASE_ROUTE}/:id/view`, this.detailView.bind(this));
     }
 
     async view(req, res){
         const rentals = await this.rentalService.getAll()
-        res.render('rental/view/index.njk', 
+        res.render('rental/views/index.njk', 
             {rentals}
         );
     }
 
-    async form(req,res){
+    async createView(req,res){
         const clients = await this.clientService.getAll();
         const cars = await this.carService.getAll();
-        res.render('rental/view/form.njk',{
-            titulo : 'Agrega una nueva renta',
-            boton : 'Agregar',
+        res.render('rental/views/add.njk',{
+            button : 'Agregar',
             cars,
             clients
         });
     }
 
-    async formEditView(req, res){
+    async editView(req, res){
         const rental = await this.rentalService.getById(req.params.id);
         const clients = await this.clientService.getAll();
         const cars = await this.carService.getAll();
-        
-         res.render('rental/view/form.njk',{
-            
-            titulo: 'Edita la informacion de la renta',
-            boton: 'Modificar',
+
+         res.render('rental/views/update.njk',{
+            button: 'Modificar',
             cars,
             clients,
             rental,
@@ -56,7 +53,6 @@ module.exports = class RentalController{
     async save(req,res){
         let rentalData;
         if(req.params.id){
-            console.log(1)
             rentalData = {
                 id: req.params.id,
                 ...req.body,
@@ -65,18 +61,9 @@ module.exports = class RentalController{
             rentalData = {...req.body}
         }
         
-        const rental = formToEntity(
-            rentalData.id || null,
-            rentalData.car,
-            rentalData.client,
-            rentalData.pricePerDay,
-            rentalData.startedAt,
-            rentalData.endedAt,
-            rentalData.totalPrice,
-            rentalData.paymentMethod,
-            rentalData.isPaid
-        );
-        await this.rentalService.save(rental);
+        const rental = formToEntity(rentalData);
+
+        // await this.rentalService.save(rental);
         res.redirect('/rentals');
     }
 
@@ -85,8 +72,16 @@ module.exports = class RentalController{
         res.redirect('/rentals');
     }
 
-    async detail(req, res){
+    async detailView(req, res){
         const rental = await this.rentalService.getById(req.params.id);
-        res.render('rental/view/detailRental.njk', {rental});
+        const client = await this.clientService.getById(rental.client);
+        const car = await this.carService.getById(rental.car);
+
+        console.log(rental)
+        res.render('rental/views/detailRental.njk',{
+                rental,
+                car,
+                client
+            });
     }
 }

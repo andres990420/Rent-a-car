@@ -12,56 +12,58 @@ module.exports = class ClientController{
         const ROUTE = this.BASE_ROUTE;
 
         app.get(`${ROUTE}`, this.index.bind(this));
-        app.get(`${ROUTE}/form`, this.formView.bind(this));
-        app.post(`${ROUTE}/form`, this.saveForm.bind(this));
-        app.get(`${ROUTE}/form/:id`, this.formEditView.bind(this));
-        app.post(`${ROUTE}/form/:id`, this.update.bind(this));
-        app.get(`${ROUTE}/client/:id`, this.detailView.bind(this));
-        app.get(`${ROUTE}/delete/:id`, this.delete.bind(this));
+        app.get(`${ROUTE}/create`, this.createView.bind(this));
+        app.post(`${ROUTE}/create`, this.save.bind(this));
+        app.get(`${ROUTE}/:id/edit`, this.editView.bind(this));
+        app.post(`${ROUTE}/:id/edit`, this.save.bind(this));
+        app.get(`${ROUTE}/:id/view`, this.detailView.bind(this));
+        app.get(`${ROUTE}/:id/delete`, this.delete.bind(this));
         
     }
 
     async index(req, res){
         const clients = await this.clientService.getAll()
-        res.render('client/view/index.njk', {clients});
+        res.render('client/views/index.njk', {clients});
     }
 
-    async formView(req, res){
-        res.render('client/view/form.njk', {
-            titulo: 'Agrega un nuevo cliente',
-            boton : 'Agregar'
+    async createView(req, res){
+        res.render('client/views/add.njk', {
+            button : 'Agregar'
         });
     }
 
-    async saveForm(req, res){
-        await this.clientService.save(formToEntity(req.body));
+    async save(req, res){
+        let clientData
+        if(req.params.id)
+        {
+            clientData = 
+            {
+                ...req.body,
+                id: req.params.id,
+            }
+        }
+        else
+        {
+            clientData = req.body
+        }
+        const client = formToEntity(clientData);
+        await this.clientService.save(client);
         res.redirect('/clients');
     }
 
-    async formEditView(req, res){
-        const client = modelToEntity(await this.clientService.getById(req.params.id))
-        res.render('client/view/form.njk', {
-            titulo: 'Agrega un nuevo cliente',
-            boton : 'Agregar',
+    async editView(req, res){
+        const client = await this.clientService.getById(req.params.id)
+        res.render('client/views/update.njk', {
+            button : 'Agregar',
             client
         });
     }
 
-    async update(req, res){
-        const client = {
-            ...req.body,
-            id: req.params.id,
-        }
-
-        await this.clientService.save(formToEntity(client));
-        res.redirect('/clients');
-    }
-
     async detailView(req, res){
         const client = modelToEntity(await this.clientService.getById(req.params.id))
-        res.render('client/view/detailClient.njk', {
+        res.render('client/views/detailClient.njk', {
             titulo: 'Agrega un nuevo cliente',
-            boton : 'Agregar',
+            buttton : 'Agregar',
             client
         });
     }
