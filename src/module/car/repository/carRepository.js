@@ -21,7 +21,7 @@ module.exports = class CarRepository {
         //     }
         // )
         const cars = await this.carModel.findAll();
-        return cars.map((car) => car.toJSON());
+        return cars.map((car) => modelToEntity(car));
     }
 
     async save(car){

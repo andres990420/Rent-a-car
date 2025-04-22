@@ -1,3 +1,5 @@
+const {modelToEntity} =  require('../mapper/clientMapper');
+
 module.exports = class ClientRepository{
     constructor(clientModel){
         this.clientModel =  clientModel;
@@ -19,7 +21,7 @@ module.exports = class ClientRepository{
         //     }
         // )
         const clients = await this.clientModel.findAll();
-        return clients.map(client => client.toJSON());
+        return clients.map(client => modelToEntity(client));
     }
 
     async getById(id){
@@ -28,7 +30,7 @@ module.exports = class ClientRepository{
                 id: id
             }
         });
-        return client
+        return modelToEntity(client);
     }
 
     async save(client){
