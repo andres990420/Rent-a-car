@@ -1,6 +1,7 @@
 const { where } = require("sequelize");
 const { CarModel } = require("../../car/carModule");
 const { ClientModel } = require("../../client/clientModule");
+const { modelToEntity } = require("../mapper/rentalMapper")
 
 module.exports = class RentalRepository{
     constructor(rentalModel){
@@ -21,35 +22,35 @@ module.exports = class RentalRepository{
         //         isPaid : true
         //     }
         // )
+        const rentals = await this.rentalModel.findAll()
+        return rentals.map(rental => modelToEntity(rental))
+    }
+
+    async getAllForDefaultIndex(){
         const rentals = await this.rentalModel.findAll({
-            include: [{
-                model: CarModel,
-                attributes: ['model', 'id']
-            },
-            {
-                model: ClientModel,
-                attributes: ['name', 'id']
-            }
-        ]})
-        return rentals.map(rental => rental.toJSON())
+            attributes: ['startedAt', 'endedAt', 'totalPrice', 'paymentMethod', 'isPaid', 'client', 'car'],
+            include: [
+                {
+                    model : ClientModel,
+                    attributes : ['name', 'lastName']
+                },
+                {
+                    model : CarModel,
+                    attributes : ['model', 'brand', 'year']
+                }
+                ]
+        })
+
+        return rentals.map(rental => rental)
     }
 
     async getById(id){
         const rental = await this.rentalModel.findOne({
             where: {
                 id: id
-            },
-            include: [{
-                model: CarModel,
-                attributes: ['model', 'id']
-            },
-            {
-                model: ClientModel,
-                attributes: ['name', 'id']
-            }]
+            }
         })
-        
-        return rental
+        return modelToEntity(rental)
     }
 
     async save(rental){
