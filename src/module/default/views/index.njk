@@ -1,0 +1,38 @@
+{% extends 'view/base.njk' %}
+{% block body %}
+<section class="section">
+    <h1 class="title header-title"> RENT A CAR</h1>
+    <div class="table-container" style="margin-top: 1rem">
+        <table class="table is-striped is-hoverable">
+            <thead>
+                <tr class="is-warning">
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-calendar-check"></i></span>Fecha de la renta</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-money-bill"></i></span>Metodo de pago</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-receipt"></i></span>Estatus del pago</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-dollar-sign"></i></span>Costo total de la renta</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-car"></i></span>Auto</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-user"></i></span>Cliente</th>
+                </tr>
+            </thead>
+            {% for rental in rentals %}
+            <tbody>
+                <tr>
+                    <td>{{rental.startedAt.toLocaleDateString()}} - {{rental.endedAt.toLocaleDateString()}}</td>
+                    <td>{{rental.paymentMethod}}</td>
+                    <td>
+                        {% if rental.isPaid == true %}
+                            <p class="tag is-success">Pagado</p></td>
+                        {% else %}
+                            <p class="tag is-danger">Pago pendiente</p>
+                        {% endif %}
+                    </td>
+                    <td>${{rental.totalPrice}}</td>
+                    <td>{{rental.Car.brand}} {{rental.Car.model}} {{rental.Car.year}}</td>
+                    <td>{{rental.Client.name}} {{rental.Client.lastName}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+{% endblock %}

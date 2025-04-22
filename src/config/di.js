@@ -5,6 +5,7 @@ const {Sequelize} = require('sequelize');
 const { CarController, CarRepository, CarService, CarModel} = require('../module/car/carModule');
 const { ClientController, ClientService, ClientRepository, ClientModel } = require('../module/client/clientModule');
 const { RentalController, RentalService, RentalRepository, RentalModel } = require('../module/rental/rentalModule');
+const  {DefaultController}  = require("../module/default/defaultModule");
 
 
 function configureSequelize(){
@@ -44,7 +45,7 @@ function addCarModuleCommoDefinitions(container){
     });
 };
 
-function addCLienteModuleCommoDefinitions(container){
+function addCLientModuleCommoDefinitions(container){
     container.addDefinitions({
         ClientController: object(ClientController).construct(get('ClientService')),
         ClientService : object(ClientService).construct(get('ClientRepository')),
@@ -66,12 +67,19 @@ function addRentalModuleCommonDefinitions(container){
     });
 };
 
+function addDefaultModuleCommonDefinitions(container){
+    container.addDefinitions({
+        DefaultController: object(DefaultController).construct(get('RentalService'))
+    });
+}
+
 module.exports = function configureDI(){
     const container = new DIContainer();
     addCommonDefinitions(container);
     addCarModuleCommoDefinitions(container);
-    addCLienteModuleCommoDefinitions(container);
+    addCLientModuleCommoDefinitions(container);
     addRentalModuleCommonDefinitions(container);
+    addDefaultModuleCommonDefinitions(container);
 
     return container;
 };
