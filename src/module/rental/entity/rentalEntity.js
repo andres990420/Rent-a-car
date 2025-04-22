@@ -9,16 +9,20 @@ module.exports =
             endedAt,
             totalPrice,
             paymentMethod,
-            isPaid
+            isPaid,
+            createdAt,
+            updatedAt
         ){
             this.id = id,
             this.car = car,
             this.client = client,
             this.pricePerDay = Number(pricePerDay),
-            this.startedAt = Date(startedAt),
-            this.endedAt = Date(endedAt),
+            this.startedAt = new Date(startedAt),
+            this.endedAt = new Date(endedAt),
             this.totalPrice = Number(totalPrice),
             this.paymentMethod = paymentMethod,
-            this.isPaid = isPaid
+            this.isPaid = isPaid,
+            this.created = new Date(createdAt),
+            this.updatedAt = new Date(updatedAt)
         }
     };
