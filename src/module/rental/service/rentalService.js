@@ -7,6 +7,10 @@ module.exports = class RentalService{
         return this.rentalRepository.getAll()
     };
 
+    getAllForDefaultIndex(){
+        return this.rentalRepository.getAllForDefaultIndex()
+    };
+
     getById(id){
         return this.rentalRepository.getById(id)
     };
