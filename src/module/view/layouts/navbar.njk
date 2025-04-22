@@ -1,0 +1,38 @@
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title header-title is-2">RENT A CAR</h1>
+        </a>
+        <div class="navbar-burger js-burger" data-target="navigationbar">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </div>
+    </div>
+    <div id="navigationbar" class="navbar-menu">
+        <div class="navbar-start">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link has-text-link ">Autos</a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item " href="/cars/create">Agregar nuevo Auto</a>
+                    <a class="navbar-item " href="/cars">Gestion de Auto</a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link has-text-link ">Clientes</a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item " href="/clients/create">Agregar un nuevo Cliente</a>
+                    <a class="navbar-item "  href="/clients">Gestion de Clientes</a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link has-text-link" href="/rentals">Rentas</a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" href="/rentals/create">Agregar una nueva renta</a>
+                    <a class="navbar-item" href="/rentals">Gestion de rentas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
