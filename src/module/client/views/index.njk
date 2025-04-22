@@ -1,0 +1,54 @@
+{% extends 'view/base.njk'%}
+
+{% block body%}
+
+<section class="section">
+    <h1 class="title header-title"> Gestion de Clientes</h1>
+    <button class="button is-link" onclick="location.href='clients/create'">
+        <span class="icon"><i class="fas fa-plus"></i></span>
+        <span>Agregar nuevo cliente</span>
+    </button>
+    <div class="table-container" style="margin-top: 1rem">
+        <table  class="table is-striped is-hoverable">
+            <thead>
+                <tr class="is-warning">
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-hashtag"></i></span>ID</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-user"></i></span>Nombre</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-passport"></i></span>Documento</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-globe"></i></span>Nacionalidad</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-phone"></i></span>Numero de telefono</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-envelope"></i></span>email</th>
+                    <th class="has-text-black"><span class="icon has-text-black"><i class="fas fa-star"></i></span>Acciones</th>
+                </tr>
+            </thead>
+            {% for client in clients %}
+            <tbody>
+                <tr>
+                    <th>{{client.id}}</th>
+                    <th>{{client.name}} {{client.lastName}}</th>
+                    <th>{{client.documentType}}: {{client.documentNumber}}</th>
+                    <th>{{client.nationality}}</th>
+                    <th>{{client.phoneNumber}}</th>
+                    <th>{{client.email}}</th>
+                    <th>
+                        <button class="button is-info is-small"  onclick="location.href='clients/{{client.id}}/view'">
+                            <span class="icon"><i class="fas fa-info-circle"></i></span>
+                            <span>Detalles</span>
+                        </button>
+                        <button class="button is-success is-small"  onclick="location.href='clients/{{client.id}}/edit'">
+                            <span class="icon"><i class="fas fa-edit"></i></span>
+                            <span>Editar</span>
+                        </button>
+                        <button class="button is-danger is-small" onclick="location.href='clients/{{client.id}}/delete'">
+                            <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                            <span>Eliminar</span>
+                        </button>
+                    </th>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+<form id="formulario" class="mb-3" method="POST">
+    <div class="columns">
+        <div class="column is-half">    
+            <div class="field">
+                <label class="label" for="name">Nombre</label>
+                <div class="control">
+                    <input required class="input" type="text" placeholder="Pedro" name="name" value="{{client.name}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="column is-half">    
+            <div class="field">
+                <label class="label" for="lastName">Apellido</label>
+                <div class="control">
+                    <input required class="input" type="text" placeholder="Martinez" name="lastName" value="{{client.lastName}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="documentType">Tipo de Documento</label>
+                <div class="control has-icons-left">
+                    <div class="select is-info is-rounded">
+                        <select required name="documentType">
+                            <option disabled>---Selecciona el tipo de Documento---</option>
+                            <option {{'selected' if client.documentType === 'Cedula'}} value="Cedula">Cedula</option>
+                            <option {{'selected' if client.documentType === 'Pasaporte'}} value="Pasaporte">Pasaporte</option>
+                        </select>
+                    </div>
+                    <span class="icon is-left">
+                        <i class="fas fa-passport"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <label class="label" for="documentNumber">Numero del documento</label>
+            <div class="field">
+                <div class="control has-icons-left">
+                    <input required class="input" type="number" placeholder="24324234" name="documentNumber" value="{{client.documentNumber}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-hashtag"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="nationality">Nacionalidad</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="text" placeholder="Venezolano" name="nationality" value="{{client.nationality}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-globe"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="address">Direccion</label>
+        <div class="field">
+            <div class="control has-icons-left">
+                <input required class="input" type="text" placeholder="calle siempretriste 45" name="address" value="{{client.address}}"/>
+                <span class="icon is-left">
+                <i class="fas fa-address-book"></i>
+            </span>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="phoneNumber">Numero de telefono</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="number" placeholder="2314141241" name="phoneNumber" value="{{client.phoneNumber}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-phone"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="field">
+                <label class="label" for="email">Email</label>
+                <div class="control has-icons-left">
+                    <input required class="input" type="email" placeholder="pmartinez@mail.com" name="email" value="{{client.email}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <label class="label" for="birthday">Fecha de nacimiento</label>
+            <div class="field">
+                <div class="control has-icons-left">
+                    <input required class="input" type="date" placeholder="" name="birthday" value="{{client.birthday}}"/>
+                    <span class="icon is-left">
+                        <i class="fas fa-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field is-grouped is-grouped-centered">
+        <div class="control">
+            <button type="submit" class="button is-primary is-fullwidth">
+                <span class="icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span>{{button}}</span>
+            </button>
+        </div>
+        <div class="control">
+            <button class="button is-danger is-outlined cancel-button" >
+                <span class="icon">
+                    <i class="fas fa-ban"></i>
+                </span>
+                <span>Cancel</span>
+            </button>
+        </div>
+    </div>
+</form>

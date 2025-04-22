@@ -1,0 +1,28 @@
+{% extends 'view/base.njk' %}
+{% block styles %}
+<link rel="stylesheet" href="/css/clientCard.css">
+{% endblock %}
+{% block body %}
+
+    <section class="section">
+        <div class="container">
+            <div class="card card-client" data-type="clients" data-id="{{client.id}}">
+                <header class="card-header has-background-link">
+                    <h2 class="card-header-title title is-centered ">
+                        <span class="icon"><i class="fas fa-user"></i></span>
+                        {{client.name}} {{client.lastName}}
+                    </h2>
+                </header>
+                <div class="card-content">
+                    
+                        {% include 'client/views/layouts/clientCard.njk' %}
+                    
+                </div>
+                {% include 'view/layouts/cardFooter.njk'%}
+            </div>
+        </div>
+    </section>    
+{% endblock %}
+{% block footerScripts %}
+<script type="text/javascript" src="/js/cardFooter.js"></script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'view/base.njk' %}
+{% block body %}
+    <div class="container ">
+    <section class="section">
+        <h1 class="title header-title">Agregando un nuevo cliente</h1>   
+        <div class="box">
+            {% include 'client/views/layouts/form.njk' %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block footerScripts %}
+<script type='text/javascript' src="/js/cancelButton.js"></script>
+{% endblock %}
