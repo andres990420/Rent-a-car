@@ -1,52 +1,65 @@
 const Rental = require('../entity/rentalEntity');
 
-function modelToEntity(
-    id,
-    car,
-    client,
-    pricePerDay,
-    startedAt,
-    endedAt,
-    totalPrice,
-    paymentMethod,
-    isPaid
-){
+function modelToEntity(model)
+{
+    const {id,
+        car,
+        client,
+        pricePerDay,
+        startedAt,
+        endedAt,
+        totalPrice,
+        paymentMethod,
+        isPaid,
+        ['created_at']: createdAt,
+        ['updated_at']:updatedAt
+    } = model
+
     const rental = new Rental(
         id,
         car,
         client,
-        Number(pricePerDay),
-        Date(startedAt),
-        Date(endedAt),
-        Number(totalPrice),
+        Number.parseFloat(pricePerDay),
+        new Date(startedAt),
+        new Date(endedAt),
+        Number.parseFloat(totalPrice),
         paymentMethod,
-        Boolean(isPaid)
+        Boolean(isPaid),
+        new Date(createdAt),
+        new Date(updatedAt)
     );
 
     return rental;
 }
 
-function formToEntity(
-    id,
-    car,
-    client,
-    pricePerDay,
-    startedAt,
-    endedAt,
-    totalPrice,
-    paymentMethod,
-    isPaid
-){
+function formToEntity(model){
+    
+    const {id,
+        car,
+        client,
+        pricePerDay,
+        startedAt,
+        endedAt,
+        totalPrice,
+        paymentMethod,
+        isPaid,
+        createdAt,
+        updatedAt
+
+    } = model
+
     const rental = new Rental (
         id,
         car,
         client,
         Number.parseFloat(pricePerDay),
-        startedAt,
-        endedAt,
+        Date(startedAt),
+        Date(endedAt),
         Number.parseFloat(totalPrice),
         paymentMethod,
-        isPaid
+        Boolean(isPaid),
+        new Date(createdAt),
+        new Date(updatedAt)
     )
     return rental;
 }
