@@ -10,7 +10,7 @@ module.exports = class RentalController{
     configureRoutes(app){
         this.BASE_ROUTE = '/rentals'
 
-        app.get(`${this.BASE_ROUTE}`, this.view.bind(this));
+        app.get(`${this.BASE_ROUTE}`, this.index.bind(this));
         app.get(`${this.BASE_ROUTE}/create`, this.createView.bind(this));
         app.post(`${this.BASE_ROUTE}/create`, this.save.bind(this));
         app.get(`${this.BASE_ROUTE}/:id/edit`, this.editView.bind(this));
@@ -19,7 +19,7 @@ module.exports = class RentalController{
         app.get(`${this.BASE_ROUTE}/:id/view`, this.detailView.bind(this));
     }
 
-    async view(req, res){
+    async index(req, res){
         const rentals = await this.rentalService.getAll()
         res.render('rental/views/index.njk', 
             {rentals}
@@ -63,7 +63,7 @@ module.exports = class RentalController{
         
         const rental = formToEntity(rentalData);
 
-        // await this.rentalService.save(rental);
+        await this.rentalService.save(rental);
         res.redirect('/rentals');
     }
 
@@ -77,7 +77,6 @@ module.exports = class RentalController{
         const client = await this.clientService.getById(rental.client);
         const car = await this.carService.getById(rental.car);
 
-        console.log(rental)
         res.render('rental/views/detailRental.njk',{
                 rental,
                 car,

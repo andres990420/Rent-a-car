@@ -54,16 +54,14 @@ module.exports = class ClientController{
     async editView(req, res){
         const client = await this.clientService.getById(req.params.id)
         res.render('client/views/update.njk', {
-            button : 'Agregar',
+            button : 'Actualizar',
             client
         });
     }
 
     async detailView(req, res){
-        const client = modelToEntity(await this.clientService.getById(req.params.id))
+        const client = await this.clientService.getById(req.params.id)
         res.render('client/views/detailClient.njk', {
-            titulo: 'Agrega un nuevo cliente',
-            buttton : 'Agregar',
             client
         });
     }

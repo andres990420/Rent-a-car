@@ -38,10 +38,10 @@ module.exports = class CarRepository {
         }
     }
 
-    async delete(car){
+    async delete(id){
         await this.carModel.destroy({
             where: {
-                id: car.id,
+                id: id,
             },
         });
     }

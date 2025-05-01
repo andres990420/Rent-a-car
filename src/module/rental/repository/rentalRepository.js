@@ -38,7 +38,7 @@ module.exports = class RentalRepository{
                     model : CarModel,
                     attributes : ['model', 'brand', 'year']
                 }
-                ]
+            ]
         })
 
         return rentals.map(rental => rental)

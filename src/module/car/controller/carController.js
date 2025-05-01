@@ -60,7 +60,7 @@ module.exports = class CarController {
             }
         }
         const car = formToEntity(carData);
-        // await this.carService.save(car);
+        await this.carService.save(car);
         res.redirect(this.ROUTE_BASE);
     }
 
