@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const { default : DIContainer, object, get, factory } = require('rsdi');
 const {Sequelize} = require('sequelize');
 const { CarController, CarRepository, CarService, CarModel} = require('../module/car/carModule');
@@ -7,11 +5,10 @@ const { ClientController, ClientService, ClientRepository, ClientModel } = requi
 const { RentalController, RentalService, RentalRepository, RentalModel } = require('../module/rental/rentalModule');
 const  {DefaultController}  = require("../module/default/defaultModule");
 
-
 function configureSequelize(){
     const sequelizeInstance = new Sequelize({
         dialect: 'sqlite',
-        storage : '/data/database.sqlite'
+        storage : process.env.DB_PATH
     })
     return sequelizeInstance;
 };
