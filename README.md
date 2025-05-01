@@ -31,19 +31,20 @@ Asegúrate de tener Node.js instalado en tu máquina. Luego, ejecuta:
     npm install
     ```
 3. **Configura las variables de entorno**:
+
 Realiza una copia del .env.dist para crear un .env
 
 4. **Inicializa la base de datos**:
 Ejecuta el siguiente comando para configurar la base de datos:
     ```bash
-    npx sequelize-cli db:migrate
+    npm run schema:sync
     ```
 ## Inicialización
 
 1. Inicia el servidor: Ejecuta el siguiente comando para iniciar la aplicación:
-
-npm start
-
+    ```
+    npm start
+    ```
 2. Accede a la aplicación: Abre tu navegador y ve a http://localhost:4000.
 
 ## Estructura del proyecto
@@ -61,9 +62,10 @@ npm start
     ├── .env                      # Variables de entorno
     ├── [package.json](http://_vscodecontentref_/0)              # Dependencias del proyecto
     └── [README.md](http://_vscodecontentref_/1)                 # Documentación
-```
+    ```
 ## Pruebas
 
 El proyecto incluye pruebas unitarias para garantizar la calidad del código. Para ejecutar las pruebas, utiliza el siguiente comando:
+    ```
 
-npm test
+    npm test
