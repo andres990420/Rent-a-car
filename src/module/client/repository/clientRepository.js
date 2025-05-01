@@ -6,20 +6,6 @@ module.exports = class ClientRepository{
     }
 
     async getAll(){
-        // await this.clientModel.sync({force : true})
-        // await this.clientModel.create(
-        //     {
-        //         name : 'Juan',
-        //         lastName : 'Perez',
-        //         documentType : 'Pasaporte',
-        //         documentNumber : 1567890,
-        //         nationality : 'Venezolano',
-        //         address : 'Calle siemprealegre 23',
-        //         phoneNumber : '42492301231',
-        //         email : 'veneco@mail.com',
-        //         birthday: '20/03/1998'
-        //     }
-        // )
         const clients = await this.clientModel.findAll();
         return clients.map(client => modelToEntity(client));
     }

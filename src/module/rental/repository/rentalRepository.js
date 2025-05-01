@@ -9,19 +9,6 @@ module.exports = class RentalRepository{
     }
 
     async getAll(){
-        //  await this.rentaltModel.sync({force : true})
-        // await this.rentalModel.create(
-        //     {
-        //         car: 1,
-        //         client: 1,
-        //         pricePerDay: 20.80,
-        //         startedAt : '04-16-2025',
-        //         endedAt : '04-20-2025',
-        //         totalPrice : 450.90,
-        //         paymentMethod : 'Efectivo',
-        //         isPaid : true
-        //     }
-        // )
         const rentals = await this.rentalModel.findAll()
         return rentals.map(rental => modelToEntity(rental))
     }

@@ -1,4 +1,13 @@
 {
+  "name":"rent-a-car",
+  "version": "1.0.0",
+  "main":"src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest --coverage",
+    "schema:sync" : "node src/cli/cli.js",
+    "dev": "npm run schmea:sync && nodemon src/app.js"
+  },
   "devDependencies": {
     "eslint": "^9.22.0",
     "jest": "^29.7.0",

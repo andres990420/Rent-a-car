@@ -7,19 +7,6 @@ module.exports = class CarRepository {
     }
 
     async getAll(){
-        // const car = this.carModel.create(
-        //     {
-        //         brand : 'toyota',
-        //         model : 'corolla',
-        //         year : 2010,
-        //         mileage : 500000,
-        //         color : 'red',
-        //         ac: false,
-        //         capacity : 5,
-        //         transmission : 'Automatico',
-        //         pricePerDay : 40.2,
-        //     }
-        // )
         const cars = await this.carModel.findAll();
         return cars.map((car) => modelToEntity(car));
     }
