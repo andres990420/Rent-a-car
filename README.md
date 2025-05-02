@@ -69,3 +69,13 @@ El proyecto incluye pruebas unitarias para garantizar la calidad del código. Pa
     ```
 
     npm test
+
+## Diagrama C4
+
+![](/docs/C4-L1.jpg)
+![](/docs/C4-L2.jpg)
+![](/docs/C4-L3.jpg)
+
+## Agradecimientos
+
+Inspirado en las clases de r/argentina-programa(https://github.com/r-argentina-programa/rent-a-car) y en repositorio de Marcelo Paternostro (https://github.com/mpaternostro/rent-a-car)
